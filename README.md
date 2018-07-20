@@ -1,6 +1,6 @@
 # React Native SQLCipher 2
 
-SQLCipher Native Plugin for React Native for Android/iOS/Windows.
+SQLCipher Native Plugin for React Native for Android/iOS.
 This plugin provides a [WebSQL](http://www.w3.org/TR/webdatabase/)-compatible API to store data in a react native app, by using a SQLCipher database on the native side.
 
 Forked from [React native SQlite 2](https://github.com/craftzdog/react-native-sqlite-2)
