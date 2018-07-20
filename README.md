@@ -27,9 +27,9 @@ pod 'SQLCipher'
 ## Usage
 
 ```javascript
-import SQLite from 'react-native-sqlcipher-2';
+import SQLite, { encodeName } from 'react-native-sqlcipher-2';
 
-const db = SQLite.openDatabase('{ name: "test.db", password: "testpassword" }', '1.0', '', 1);
+const db = SQLite.openDatabase(encodeName('test.db', 'testpassword'), '1.0', '', 1);
 db.transaction(function (txn) {
   txn.executeSql('DROP TABLE IF EXISTS Users', []);
   txn.executeSql('CREATE TABLE IF NOT EXISTS Users(user_id INTEGER PRIMARY KEY NOT NULL, name VARCHAR(30))', []);
@@ -51,11 +51,11 @@ It can be used with [pouchdb-adapter-react-native-sqlite](https://github.com/sre
 
 ```javascript
 import PouchDB from 'pouchdb-react-native'
-import SQLite from 'react-native-sqlcipher-2'
+import SQLite, { encodeName } from 'react-native-sqlcipher-2'
 import SQLiteAdapterFactory from 'pouchdb-adapter-react-native-sqlite'
 
 const SQLiteAdapter = SQLiteAdapterFactory(SQLite)
 PouchDB.plugin(SQLiteAdapter)
-var db = new PouchDB('{ name: "test.db", password: "testpassword" }', { adapter: 'react-native-sqlite' })
+var db = new PouchDB(encodeName('test', 'testpassword'), { adapter: 'react-native-sqlite' })
 ```
 
