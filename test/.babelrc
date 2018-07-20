@@ -3,7 +3,7 @@
   "plugins": [
     ["module-resolver", {
       "alias": {
-        "react-native-sqlite-2": ".."
+        "react-native-sqlcipher-2": ".."
       }
     }]
   ]

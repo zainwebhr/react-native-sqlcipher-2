@@ -1,14 +1,14 @@
 {
-  "name": "react-native-sqlite-2",
+  "name": "react-native-sqcipher-2",
   "version": "1.6.0",
-  "description": "SQLite Storage for React Native",
+  "description": "SQLCipher Storage for React Native",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/craftzdog/react-native-sqlite-2.git"
+    "url": "git://github.com/sreejithkrishnanr/react-native-sqlite-2.git"
   },
   "bugs": {
-    "url": "https://github.com/craftzdog/react-native-sqlite-2/issues"
+    "url": "https://github.com/sreejithkrishnanr/react-native-sqlite-2/issues"
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
@@ -17,7 +17,7 @@
     "react-native",
     "pouchdb"
   ],
-  "author": "Takuya Matsuyama <hi@craftz.dog>",
+  "author": "Sreejith Krishnan R <sreejith.aruvikkara@gmail.com>",
   "license": "Apache-2.0",
   "peerDependencies": {
     "react-native": ">= 0.47.0"
