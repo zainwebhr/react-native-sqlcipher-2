@@ -207,8 +207,6 @@
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"${SRCROOT}/../../../ios/Pods/SQLCipher/**",
-					"${SRCROOT}/../test/ios/Pods/Headers/Public/SQLCipher/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -227,8 +225,6 @@
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"${SRCROOT}/../../../ios/Pods/SQLCipher/**",
-					"${SRCROOT}/../test/ios/Pods/Headers/Public/SQLCipher/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
