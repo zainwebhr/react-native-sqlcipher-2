@@ -2,7 +2,7 @@ import map from 'lodash.map';
 import SQLiteResult from './SQLiteResult';
 import zipObject from 'lodash.zipobject';
 import { NativeModules, Platform } from 'react-native';
-const { RNSqlite2 } = NativeModules;
+const { RNSqlCipher } = NativeModules;
 
 function massageError(err) {
   return typeof err === 'string' ? new Error(err) : err;
@@ -80,7 +80,7 @@ SQLiteDatabase.prototype.exec = function exec(queries, readOnly, callback) {
     callback(massageError(err));
   }
 
-  RNSqlite2.exec(
+  RNSqlCipher.exec(
     this._name,
     this._password,
     map(queries, arrayifyQuery),

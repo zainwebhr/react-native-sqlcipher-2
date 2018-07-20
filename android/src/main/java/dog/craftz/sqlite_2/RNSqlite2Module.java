@@ -56,7 +56,7 @@ public class RNSqlite2Module extends ReactContextBaseJavaModule {
 
   @Override
   public String getName() {
-    return "RNSqlite2";
+    return "RNSqlCipher";
   }
 
   private Handler createBackgroundHandler() {
