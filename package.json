@@ -1,6 +1,6 @@
 {
   "name": "react-native-sqlcipher-2",
-  "version": "1.0.0-beta",
+  "version": "1.0.0",
   "description": "SQLCipher Storage for React Native",
   "main": "index.js",
   "repository": {
