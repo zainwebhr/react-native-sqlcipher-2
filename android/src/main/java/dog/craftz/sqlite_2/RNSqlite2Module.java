@@ -12,10 +12,12 @@ import com.facebook.react.bridge.WritableNativeArray;
 import android.content.Context;
 import android.util.Log;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
+
 import android.os.Handler;
 import android.os.HandlerThread;
+
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteStatement;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,6 +51,7 @@ public class RNSqlite2Module extends ReactContextBaseJavaModule {
     super(reactContext);
     this.context = reactContext.getApplicationContext();
     this.reactContext = reactContext;
+    SQLiteDatabase.loadLibs(reactContext);
   }
 
   @Override
@@ -63,7 +66,8 @@ public class RNSqlite2Module extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void exec(final String dbName, final ReadableArray queries, final Boolean readOnly, final Promise promise) {
+  public void exec(final String dbName, final String dbPassword, final ReadableArray queries,
+                   final Boolean readOnly, final Promise promise) {
     debug("exec called: %s", dbName);
 
     backgroundHandler.post(new Runnable() {
@@ -72,7 +76,7 @@ public class RNSqlite2Module extends ReactContextBaseJavaModule {
         try {
           int numQueries = queries.size();
           SQLitePLuginResult[] results = new SQLitePLuginResult[numQueries];
-          SQLiteDatabase db = getDatabase(dbName);
+          SQLiteDatabase db = getDatabase(dbName, dbPassword);
 
           for (int i = 0; i < numQueries; i++) {
             ReadableArray sqlQuery = queries.getArray(i);
@@ -203,14 +207,14 @@ public class RNSqlite2Module extends ReactContextBaseJavaModule {
     return null;
   }
 
-  private SQLiteDatabase getDatabase(String name) {
+  private SQLiteDatabase getDatabase(String name, String password) {
     SQLiteDatabase database = DATABASES.get(name);
     if (database == null) {
       if (":memory:".equals(name)) {
-        database = SQLiteDatabase.openOrCreateDatabase(name, null);
+        database = SQLiteDatabase.openOrCreateDatabase(name, password, null);
       } else {
         File file = new File(this.context.getFilesDir(), name);
-        database = SQLiteDatabase.openOrCreateDatabase(file, null);
+        database = SQLiteDatabase.openOrCreateDatabase(file, password, null);
       }
       DATABASES.put(name, database);
     }

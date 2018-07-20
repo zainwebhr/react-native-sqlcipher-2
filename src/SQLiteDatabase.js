@@ -8,8 +8,17 @@ function massageError(err) {
   return typeof err === 'string' ? new Error(err) : err;
 }
 
-function SQLiteDatabase(name) {
+function SQLiteDatabase(args) {
+  const { name, password } = JSON.parse(args);
+  if (!name) {
+    throw `Invalid name`;
+  }
+  if (!password) {
+    throw `Invalid password`;
+  }
+  
   this._name = name;
+  this._password = password;
 }
 
 function dearrayifyRow(res) {
@@ -73,6 +82,7 @@ SQLiteDatabase.prototype.exec = function exec(queries, readOnly, callback) {
 
   RNSqlite2.exec(
     this._name,
+    this._password,
     map(queries, arrayifyQuery),
     readOnly
   ).then(onSuccess, onError);

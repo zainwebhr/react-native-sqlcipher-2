@@ -8,7 +8,7 @@ import {
 
 import SQLite from 'react-native-sqlite-2'
 
-const database_name = 'test.db'
+const database_name = JSON.stringify({name: 'test.db', password: 'testpassword'})
 const database_version = '1.0'
 const database_displayname = 'SQLite Test Database'
 const database_size = 200000
