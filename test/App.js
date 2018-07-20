@@ -6,9 +6,9 @@ import {
   ListView
 } from 'react-native'
 
-import SQLite from 'react-native-sqlcipher-2'
+import SQLite, { encodeName } from 'react-native-sqlcipher-2'
 
-const database_name = JSON.stringify({name: 'test.db', password: 'testpassword'})
+const database_name = encodeName('test.db', 'testpasswor')
 const database_version = '1.0'
 const database_displayname = 'SQLite Test Database'
 const database_size = 200000

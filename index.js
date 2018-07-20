@@ -1,4 +1,4 @@
-import module from './src'
+import SQLite, { encodeName as encodeNameImpl } from './src'
 
 if (!process.nextTick) {
   process.nextTick = function (callback) {
@@ -6,4 +6,5 @@ if (!process.nextTick) {
   };
 }
 
-export default module;
+export default SQLite;
+export const encodeName = encodeNameImpl;

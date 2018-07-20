@@ -1,7 +1,19 @@
 import customOpenDatabase from 'websql/custom';
 import SQLiteDatabase from './SQLiteDatabase';
 
-var openDB = customOpenDatabase(SQLiteDatabase);
+const openDB = customOpenDatabase(SQLiteDatabase);
+
+export function encodeName(dbName, password) {
+  if (!dbName) {
+    throw `DB name cannot be empty`;
+  }
+
+  if (!password) {
+    throw `DB password cannot be empty`;
+  }
+
+  return JSON.stringify({name: dbName, password});
+}
 
 function SQLitePlugin() {
 }
