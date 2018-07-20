@@ -1,6 +1,6 @@
 {
   "name": "react-native-sqcipher-2",
-  "version": "1.6.0",
+  "version": "1.0.0",
   "description": "SQLCipher Storage for React Native",
   "main": "index.js",
   "repository": {
@@ -15,7 +15,8 @@
   },
   "keywords": [
     "react-native",
-    "pouchdb"
+    "pouchdb",
+    "sqlcipher"
   ],
   "author": "Sreejith Krishnan R <sreejith.aruvikkara@gmail.com>",
   "license": "Apache-2.0",
