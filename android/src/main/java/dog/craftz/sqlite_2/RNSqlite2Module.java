@@ -1,5 +1,11 @@
 package dog.craftz.sqlite_2;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.util.Log;
+
 import com.facebook.react.bridge.NativeArray;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -8,13 +14,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableNativeArray;
-
-import android.content.Context;
-import android.util.Log;
-import android.database.Cursor;
-
-import android.os.Handler;
-import android.os.HandlerThread;
 
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteStatement;
