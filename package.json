@@ -11,8 +11,7 @@
     "url": "https://github.com/craftzdog/react-native-sqlite-2/issues"
   },
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "keywords": [
     "react-native",
