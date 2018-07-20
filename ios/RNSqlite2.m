@@ -56,7 +56,7 @@ RCT_EXPORT_MODULE()
   return [[self getDatabaseDir] stringByAppendingPathComponent: dbName];
 }
 
--(NSValue*)openDatabase: (NSString*)dbName {
+-(NSValue*)openDatabase: (NSString*)dbName: (NSString*) password {
   logDebug(@"opening DB: %@", dbName);
   NSValue *cachedDB = [cachedDatabases objectForKey:dbName];
   if (cachedDB == nil) {
@@ -66,17 +66,37 @@ RCT_EXPORT_MODULE()
     const char *sqliteName = [fullDbPath UTF8String];
     sqlite3 *db;
     if (sqlite3_open(sqliteName, &db) != SQLITE_OK) {
-      logDebug(@"cannot open database: %@", dbName); // shouldn't happen
+      @throw[NSException exceptionWithName:@"cannot-open-db" reason:nil userInfo:nil];
     };
+    if (sqlite3_key(db, [password UTF8String], password.length) != SQLITE_OK) {
+      @throw[NSException exceptionWithName:@"key-error" reason:nil userInfo:nil];
+    };
+    
+    // Validate key upon opening DB
+    if (sqlite3_exec(db, (const char*) "SELECT count(*) FROM sqlite_master;",
+                     NULL, NULL, NULL) != SQLITE_OK) {
+      @throw[NSException exceptionWithName:@"key-error" reason:nil userInfo:nil];
+    };
+    sqlite3_stmt *stmt;
+    if(sqlite3_prepare_v2(db, "PRAGMA cipher_version;", -1, &stmt, NULL) != SQLITE_OK
+       || sqlite3_step(stmt) != SQLITE_ROW
+       || sqlite3_column_text(stmt, 0) == NULL) {
+      sqlite3_finalize(stmt);
+      @throw[NSException exceptionWithName:@"key-error" reason:nil userInfo:nil];
+    }
+    sqlite3_finalize(stmt);
+    
     cachedDB = [NSValue valueWithPointer:db];
     [cachedDatabases setObject: cachedDB forKey: dbName];
   } else {
     logDebug(@"re-using existing db");
   }
+    
   return cachedDB;
 }
 
 RCT_EXPORT_METHOD(exec:(NSString *)dbName
+                  password:(NSString *)password
                   queries: (NSArray *)sqlQueries
                   readOnly:(BOOL)readOnly
                   resolver:(RCTPromiseResolveBlock)resolve
@@ -89,7 +109,15 @@ RCT_EXPORT_METHOD(exec:(NSString *)dbName
   NSArray *sqlResult;
   int i;
   logDebug(@"dbName: %@", dbName);
-  NSValue *databasePointer = [self openDatabase:dbName];
+  
+  NSValue *databasePointer;
+  @try {
+      databasePointer = [self openDatabase:dbName:password];
+  } @catch (NSException *exception) {
+    reject([exception name], [exception reason], nil);
+    return;
+  }
+  
   sqlite3 *db = [databasePointer pointerValue];
   NSMutableArray *sqlResults = [NSMutableArray arrayWithCapacity:numQueries];
 

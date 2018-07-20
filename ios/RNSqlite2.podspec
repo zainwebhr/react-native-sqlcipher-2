@@ -16,5 +16,6 @@ Pod::Spec.new do |s|
   s.library      = "sqlite3"
 
   s.dependency "React"
+  s.dependency "SQLCipher"
 end
 
