@@ -1,14 +1,14 @@
 {
   "name": "react-native-sqlcipher-2",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "SQLCipher Storage for React Native",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sreejithkrishnanr/react-native-sqlite-2.git"
+    "url": "git://github.com/sreejithkrishnanr/react-native-sqlcipher-2.git"
   },
   "bugs": {
-    "url": "https://github.com/sreejithkrishnanr/react-native-sqlite-2/issues"
+    "url": "https://github.com/sreejithkrishnanr/react-native-sqlcipher-2/issues"
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
