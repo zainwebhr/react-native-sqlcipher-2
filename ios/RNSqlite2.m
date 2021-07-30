@@ -1,3 +1,4 @@
+#define SQLITE_HAS_CODEC 1
 #import "RNSqlite2.h"
 #import "sqlite3.h"
 
@@ -65,10 +66,11 @@ RCT_EXPORT_MODULE(RNSqlCipher)
     logDebug(@"full path: %@", fullDbPath);
     const char *sqliteName = [fullDbPath UTF8String];
     sqlite3 *db;
+
     if (sqlite3_open(sqliteName, &db) != SQLITE_OK) {
       @throw[NSException exceptionWithName:@"cannot-open-db" reason:nil userInfo:nil];
     };
-    if (sqlite3_key(db, [password UTF8String], password.length) != SQLITE_OK) {
+    if (sqlite3_key (db, [password UTF8String], password.length) != SQLITE_OK) {
       @throw[NSException exceptionWithName:@"key-error" reason:nil userInfo:nil];
     };
     
